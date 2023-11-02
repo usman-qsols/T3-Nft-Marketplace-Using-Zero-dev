@@ -1,14 +1,17 @@
-import { ConnectButton } from "@rainbow-me/rainbowkit";
-import Router, { useRouter } from "next/router";
+// import { ConnectButton } from "@rainbow-me/rainbowkit";
+import { useRouter } from "next/router";
 import { api } from "~/utils/api";
 import { useAccount } from "wagmi";
 import StripeCheckOutButton from "../stripeComponents/checkout";
 import Link from "next/link";
-export default function Hero(props: any) {
+type AppProps = {
+  create: string;
+};
+export default function Hero(props: AppProps) {
   const router = useRouter();
   const { isConnected } = useAccount();
 
-  const { mutateAsync, error } = api.nft.createNft.useMutation();
+  // const { mutateAsync, error } = api.nft.createNft.useMutation();
 
   const handleCreate = () => {
     if (isConnected) {
@@ -28,7 +31,7 @@ export default function Hero(props: any) {
           </h2>
 
           <p className="hero-text">
-            Explore on the world's best & largest NFT marketplace. You can also
+            Explore on the worlds best & largest NFT marketplace. You can also
             buy Tokens if you want to buy Nfts on our marketplace. Just to click
             on Buy Tokens button below.
           </p>
@@ -41,7 +44,7 @@ export default function Hero(props: any) {
             </Link>
 
             <button className="btn" onClick={handleCreate}>
-              <span>{props.create}</span>
+              <span>{props?.create}</span>
             </button>
             {/* <StripeCheckOutButton /> */}
           </div>

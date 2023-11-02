@@ -24,30 +24,30 @@ import { useAccount } from "wagmi";
 import { ZeroDevWeb3Auth } from "@zerodev/web3auth";
 import Link from "next/link";
 
-type User = {
-  aggregateVerifier?: string | undefined;
-  appState?: string | undefined;
-  dappShare?: string | undefined;
-  email: string | undefined;
-  idToken: string | undefined;
-  isMfaEnabled: boolean | undefined;
-  name: string | undefined;
-  oAuthAccessToken: string | undefined;
-  oAuthIdToken: string | undefined;
-  profileImage: string | undefined;
-  typeOfLogin: string | undefined;
-  verifier: string | undefined;
-  verifierId: string | undefined;
-};
+// type User = {
+//   aggregateVerifier?: string | undefined;
+//   appState?: string | undefined;
+//   dappShare?: string | undefined;
+//   email: string | undefined;
+//   idToken: string | undefined;
+//   isMfaEnabled: boolean | undefined;
+//   name: string | undefined;
+//   oAuthAccessToken: string | undefined;
+//   oAuthIdToken: string | undefined;
+//   profileImage: string | undefined;
+//   typeOfLogin: string | undefined;
+//   verifier: string | undefined;
+//   verifierId: string | undefined;
+// };
 
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [pageOpen, setPageOpen] = useState(false);
   const [data, setData] = useState(false);
   const [walletAddress, setWalletAddress] = useState("");
-  const [name, setName] = useState<String>("");
-  const [email, setEmail] = useState<String>("");
-  const [user, setUser] = useState<OpenloginUserInfo>();
+  const [name, setName] = useState<string>("");
+  const [email, setEmail] = useState<string>("");
+  // const [user, setUser] = useState<OpenloginUserInfo>();
   const router = useRouter();
   const { isConnected, address, isDisconnected } = useAccount();
   // let user: User = JSON.parse(localStorage.getItem("user") ?? "");
@@ -102,66 +102,66 @@ function Navbar() {
     console.log("hhehehhe");
   });
 
-  const handleCreate = () => {
+  const handleCreate = async () => {
     if (isConnected) {
-      router.push("/createNft");
+      await router.push("/createNft");
     } else {
       alert("Please Login first");
     }
   };
 
-  useEffect(() => {
-    console.log("Hello");
-    if (isConnected) {
-      console.log("userr", user);
-      if (user) {
-        console.log("user", user);
-        setName(user?.name);
-        setEmail(user.email);
-        // wallet_address = user.wallet_address;
-        setWalletAddress("");
-        console.log("name", name);
-        console.log("email", email);
-        console.log("addr", wallet_address);
-        setData(true);
-      }
-    }
-    if (isDisconnected) {
-      setData(false);
-    }
-  }, [pageOpen]);
+  // useEffect(() => {
+  //   console.log("Hello");
+  //   if (isConnected) {
+  //     console.log("userr", user);
+  //     if (user) {
+  //       console.log("user", user);
+  //       setName(user?.name);
+  //       setEmail(user.email);
+  //       // wallet_address = user.wallet_address;
+  //       setWalletAddress("");
+  //       console.log("name", name);
+  //       console.log("email", email);
+  //       console.log("addr", wallet_address);
+  //       setData(true);
+  //     }
+  //   }
+  //   if (isDisconnected) {
+  //     setData(false);
+  //   }
+  // }, [pageOpen]);
 
   // useEffect(() => {
 
   // });
 
-  async function logout() {
-    try {
-      // dispatch(setSmartAccount(undefined));
-      localStorage.clear();
-      // toast({
-      //   title: "Logout Successfully!",
-      //   status: "success",
-      //   isClosable: true,
-      //   position: "top-right",
-      //   duration: 3000,
-      // });
-      router.push("/login");
-    } catch (error) {
-      // throw new Error(error)
-      console.log(error, "error");
-    }
-  }
-  function copyAddress() {
-    navigator.clipboard
-      .writeText(wallet_address)
-      .then(function () {
-        alert("Address copied to clipboard: " + wallet_address);
-      })
-      .catch(function (err) {
-        console.error("Unable to copy address: ", err);
-      });
-  }
+  // async function logout() {
+  // try {
+  // dispatch(setSmartAccount(undefined));
+  // localStorage.clear();
+  // toast({
+  //   title: "Logout Successfully!",
+  //   status: "success",
+  //   isClosable: true,
+  //   position: "top-right",
+  //   duration: 3000,
+  // });
+  // router.push("/login");
+  // } catch (error) {
+  // throw new Error(error)
+  // console.log(error, "error");
+  // }
+  // }
+  // function copyAddress() {
+  //   navigator.clipboard
+  //     .writeText(wallet_address)
+  //     .then(function () {
+  //       alert("Address copied to clipboard: " + wallet_address);
+  //     })
+  //     .catch(function (err) {
+  //       console.error("Unable to copy address: ", err);
+  //     });
+  // }
 
   return (
     <nav className="flex flex-wrap items-center justify-between p-6">

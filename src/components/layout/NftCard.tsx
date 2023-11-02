@@ -6,7 +6,7 @@ import { useAccount } from "wagmi";
 import axios from "axios";
 import getStipePromise from "../lib/stripe";
 import { Stripe, loadStripe } from "@stripe/stripe-js";
-let stripePromise: Promise<Stripe | null> = loadStripe(
+const stripePromise: Promise<Stripe | null> = loadStripe(
   process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY ??
     "pk_test_51O3IVKIdcf8l1iwJyfBoPIDsYS1uBVV9mYdwCGqurdSxg0deL02H6LUO8GZi9U1z3GLGb1GWw7db6BMidD9BAnQ700V5my261i",
 );
@@ -31,7 +31,15 @@ let stripePromise: Promise<Stripe | null> = loadStripe(
 //     quantity: 1,
 //   },
 // ];
-const NftCard = (props: any) => {
+type AppProps = {
+  title: string;
+  price: string | null;
+  src: string | any;
+  ownerAddress: any | null;
+  id: string;
+  active: boolean | null;
+};
+const NftCard = (props: AppProps) => {
   const [active, setActive] = useState(true);
   const router = useRouter();
   const { address } = useAccount();

@@ -9,7 +9,7 @@ import {
 } from "wagmi";
 import axios from "axios";
 
-let stripePromise: Promise<Stripe | null> = loadStripe(
+const stripePromise: Promise<Stripe | null> = loadStripe(
   process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY ??
     "pk_test_51O3IVKIdcf8l1iwJyfBoPIDsYS1uBVV9mYdwCGqurdSxg0deL02H6LUO8GZi9U1z3GLGb1GWw7db6BMidD9BAnQ700V5my261i",
 );

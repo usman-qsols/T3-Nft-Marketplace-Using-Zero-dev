@@ -7,7 +7,7 @@ import { ZeroDevWeb3Auth } from "@zerodev/web3auth";
 import { useAccount } from "wagmi";
 import { api } from "~/utils/api";
 
-const nftCardContainer = () => {
+const NftCardContainer = () => {
   const { isConnected, address } = useAccount();
   const router = useRouter();
   // const { ownerAddress } = router.query;
@@ -59,4 +59,4 @@ const nftCardContainer = () => {
   );
 };
 
-export default nftCardContainer;
+export default NftCardContainer;

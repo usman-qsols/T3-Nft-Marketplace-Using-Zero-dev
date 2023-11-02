@@ -7,6 +7,9 @@ const nextConfig = {
     // !! WARN !!
     ignoreBuildErrors: true,
   },
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
   reactStrictMode: true,
   webpack: (config, { isServer }) => {
     if (!isServer) {

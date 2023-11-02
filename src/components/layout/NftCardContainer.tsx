@@ -7,7 +7,7 @@ import { ZeroDevWeb3Auth } from "@zerodev/web3auth";
 import { useAccount } from "wagmi";
 import { api } from "~/utils/api";
 
-const nftCardContainer = () => {
+const NftCardContainer = () => {
   const { isConnected } = useAccount();
 
   const { data } = api.nft.all.useQuery();
@@ -16,7 +16,7 @@ const nftCardContainer = () => {
   useEffect(() => {
     if (isConnected) {
       const zeroDevWeb3Auth = ZeroDevWeb3Auth.getInstance([
-        process.env.REACT_APP_ZERODEV_PROJECT_ID ||
+        process.env.REACT_APP_ZERODEV_PROJECT_ID ??
           "b5486fa4-e3d9-450b-8428-646e757c10f6",
       ]);
       zeroDevWeb3Auth.getUserInfo().then(console.log);
@@ -64,4 +64,4 @@ const nftCardContainer = () => {
   );
 };
 
-export default nftCardContainer;
+export default NftCardContainer;

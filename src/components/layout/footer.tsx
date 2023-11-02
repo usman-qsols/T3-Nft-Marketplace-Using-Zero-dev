@@ -8,7 +8,7 @@ import { useAccount } from "wagmi";
 import { useRouter } from "next/router";
 
 const Footer = () => {
-  const { isConnected, address } = useAccount();
+  // const { isConnected, address } = useAccount();
   const router = useRouter();
   return (
     <footer className="footer">

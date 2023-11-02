@@ -20,7 +20,7 @@ import T3MarketAddress from "../contractAddressAndJson/T3MarketplaceContract-add
 import MyTokenAddress from "../contractAddressAndJson/MyToken-address.json";
 import LoadingModal from "./loader";
 
-const createNftComp = () => {
+const CreateNftComp = () => {
   const [title, setTitle] = useState("");
   const [price, setPrice] = useState("");
   const [description, setDescription] = useState<string>("");
@@ -205,7 +205,7 @@ const createNftComp = () => {
   //   router.push("/");
   // }
 
-  async function mintNft(e: any) {
+  function mintNft(e: React.MouseEvent<HTMLElement>) {
     e.preventDefault();
     console.log("Ipfs url--> ", ipfsUrl);
 
@@ -321,4 +321,4 @@ const createNftComp = () => {
   );
 };
 
-export default createNftComp;
+export default CreateNftComp;
