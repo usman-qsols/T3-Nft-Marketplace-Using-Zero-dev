@@ -27,6 +27,7 @@ export const { chains, publicClient, webSocketPublicClient } = configureChains(
 const connectors = connectorsForWallets([
   {
     groupName: "Social",
+    // eslint-disable-next-line
     wallets: [
       googleWallet({ chains, options: { projectId } }),
       facebookWallet({ chains, options: { projectId } }),
