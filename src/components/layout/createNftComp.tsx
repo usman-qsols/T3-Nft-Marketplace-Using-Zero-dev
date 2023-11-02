@@ -33,10 +33,6 @@ const createNftComp = () => {
   const { mutateAsync, error } = api.nft.createNft.useMutation();
   const router = useRouter();
 
-  const active = true;
-  const sellerAddress = "0xCDeD68e89f67d6262F82482C2710Ddd52492808a";
-  const contractAddress = "0x43c99947D6E25497Dc69351FaBb3025F7ACC2A6b";
-
   const { address, isConnected } = useAccount();
   console.log("Add", address);
 
@@ -191,8 +187,8 @@ const createNftComp = () => {
         price: price,
         description: description,
         ipfsHash: ipfsUrl,
-        ownerAddress: address.toString(),
-        tokenId: tokenIdData.toString(),
+        ownerAddress: address?.toString(),
+        tokenId: tokenIdData?.toString(),
         active: true,
       });
     } catch (error) {
