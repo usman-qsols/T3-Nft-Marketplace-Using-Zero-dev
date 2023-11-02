@@ -1,0 +1,50 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+    provider = "prisma-client-js"
+}
+
+datasource db {
+    provider = "mongodb"
+    url      = env("DATABASE_URL")
+}
+
+// model Post {
+//     id        Int      @id @default(autoincrement())
+//     name      String
+//     createdAt DateTime @default(now())
+//     updatedAt DateTime @updatedAt
+
+//     @@index([name])
+// }
+
+model AdminUser {
+    id             String   @id @default(auto()) @map("_id") @db.ObjectId
+    balance        Int?     @default(0)
+    full_name      String?  @default("")
+    wallet_address String?  @default("")
+    email_address  String?  @default("")
+    created_at     DateTime @default(now())
+    updated_at     DateTime @default(now()) @updatedAt
+
+    // To return `Date`s intact through the API we use transformers
+    // https://trpc.io/docs/data-transformers
+    // This is unique so it can be used for cursor-based pagination
+    @@map("admin_user")
+}
+
+model Nft {
+    id           String   @id @default(auto()) @map("_id") @db.ObjectId
+    title        String
+    active       Boolean? @default(false)
+    price        String?
+    ipfsHash     String?
+    description  String?
+    tokenId      String?
+    ownerAddress String?
+    created_at   DateTime @default(now())
+    updated_at   DateTime @default(now()) @updatedAt
+
+    @@map("store_nfts")
+}
