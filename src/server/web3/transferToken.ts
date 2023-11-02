@@ -4,7 +4,7 @@ import erc20Artifact from "./erc20abi.json";
 const erc20Abi = erc20Artifact.abi;
 
 export async function transferTokens(payload: any) {
-  if (!payload || !payload.toAddress || !payload.amount) {
+  if (!payload || !payload?.toAddress || !payload?.amount) {
     return { success: false, message: "Invalid payload data" };
   }
 
@@ -13,7 +13,7 @@ export async function transferTokens(payload: any) {
     const rpcUrl: string | undefined = process.env.NEXT_PUBLIC_Mumbai_RPC_URL;
     const erc20TokenAddress: any =
       process.env.NEXT_PUBLIC_ERC20_Contract_Address;
-    const toAddress: String = payload?.toAddress;
+    const toAddress: string = payload?.toAddress;
     const amount: any = payload?.amount;
 
     if (!privateKey || !rpcUrl || !erc20TokenAddress) {
