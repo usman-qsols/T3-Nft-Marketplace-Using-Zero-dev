@@ -15,8 +15,8 @@ export const createNftSchema = z.object({
   price: z.string(),
   description: z.string(),
   ipfsHash: z.string(),
-  ownerAddress: z.string(),
-  tokenId: z.string(),
+  ownerAddress: z.string().optional(),
+  tokenId: z.string().optional(),
   active: z.boolean(),
 });
 

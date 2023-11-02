@@ -33,6 +33,10 @@ const createNftComp = () => {
   const { mutateAsync, error } = api.nft.createNft.useMutation();
   const router = useRouter();
 
+  const active = true;
+  const sellerAddress = "0xCDeD68e89f67d6262F82482C2710Ddd52492808a";
+  const contractAddress = "0x43c99947D6E25497Dc69351FaBb3025F7ACC2A6b";
+
   const { address, isConnected } = useAccount();
   console.log("Add", address);
 
@@ -237,12 +241,12 @@ const createNftComp = () => {
       <h2 className="h2 section-title">Create and sell your NFTs</h2>
 
       <div className="footer-list mb-20 mt-20 w-[100%] md:w-[50%]">
-        <h3 className="text-[12px] md:text-[16px]">
+        {/* <h3 className="text-[12px] md:text-[16px]">
           Contract Address : {contractAddress}
         </h3>
         <h3 className="text-[12px] md:text-[16px]">
           Marketplace Address : {sellerAddress}
-        </h3>
+        </h3> */}
         <form action="" className="newsletter-form">
           {/* <input type="email" name="email" placeholder="info@yourmail.com" required className="newsletter-input"> */}
           <input
