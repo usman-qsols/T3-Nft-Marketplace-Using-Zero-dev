@@ -3,6 +3,7 @@ import erc20Artifact from "./erc20abi.json";
 
 const erc20Abi = erc20Artifact.abi;
 
+// eslint-disable-next-line
 export async function transferTokens(payload: any) {
   if (!payload || !payload?.toAddress || !payload?.amount) {
     return { success: false, message: "Invalid payload data" };
@@ -23,6 +24,7 @@ export async function transferTokens(payload: any) {
     const web3 = new Web3(rpcUrl);
     const account = web3.eth.accounts.privateKeyToAccount(privateKey);
 
+    // eslint-disable-next-line
     const erc20TokenContract = new web3.eth.Contract(
       erc20Abi,
       erc20TokenAddress,
@@ -42,7 +44,7 @@ export async function transferTokens(payload: any) {
       gasPrice: gasPrice,
       nonce: await web3.eth.getTransactionCount(account.address),
     };
-
+    // eslint-disable-next-line
     const signedTransaction = await web3.eth.accounts.signTransaction(
       options,
       privateKey,
