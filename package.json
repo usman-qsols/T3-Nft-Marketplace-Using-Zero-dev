@@ -39,7 +39,7 @@
     "@web3auth/wallet-connect-v1-adapter": "^6.1.8",
     "@zerodev/sdk": "^4.0.30",
     "@zerodev/wagmi": "^4.1.19",
-    "@zerodev/web3auth": "^4.1.16",
+    "@zerodev/web3auth": "^4.0.0",
     "axios": "^1.6.0",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.0.0",
