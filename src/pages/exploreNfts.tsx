@@ -12,8 +12,8 @@ const NftCardContainer = dynamic(
   },
 );
 
-const exploreNfts = () => {
+const ExploreNfts = () => {
   return <NftCardContainer />;
 };
 
-export default exploreNfts;
+export default ExploreNfts;
