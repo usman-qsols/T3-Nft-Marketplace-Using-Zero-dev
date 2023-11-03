@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useReducer } from "react";
 import Link from "next/link";
 import { useState } from "react";
 import {
@@ -15,9 +15,11 @@ import MyTokenJson from "../components/contractAddressAndJson/MyToken.json";
 import T3MarketAddress from "../components/contractAddressAndJson/T3MarketplaceContract-address.json";
 import MyTokenAddress from "../components/contractAddressAndJson/MyToken-address.json";
 import LoadingModal from "../components/layout/loader";
+import { useRouter } from "next/router";
 
 const success = () => {
   const [amount, setAmount] = useState("");
+  const router = useRouter();
   const { config: buyConfig } = usePrepareContractWrite({
     address: "0x51c144F49e4a8C0523AF67F5698Bd970C1DB6db6",
     abi: MyTokenJson.abi,
@@ -56,6 +58,12 @@ const success = () => {
       alert(error);
     }
   }
+  useEffect(() => {
+    if (approveTxIsSuccess) {
+      alert(`${amount} tokens have been approved!`);
+      router.push("/");
+    }
+  }, [approveTxIsSuccess]);
 
   return (
     <div className="container">
@@ -79,6 +87,7 @@ const success = () => {
         <button
           className="btn mb-[10px] flex h-[50px] w-[200px] justify-center"
           onClick={approveNft}
+          disabled={approveTxIsSuccess ? true : false}
         >
           <span>
             {approveIsLoading

@@ -39,7 +39,6 @@ const NftDetailPage = () => {
   const [data, setData] = useState<Data | null>();
   const [openInputModal, setOpenInputModal] = useState(false);
   const [price, setPrice] = useState("");
-  // const [openLoader, setOpenLoader] = useState(true);
 
   const router = useRouter();
   const { address, isConnected } = useAccount();
@@ -50,13 +49,10 @@ const NftDetailPage = () => {
   const { data: myNft } = api.nft.getSingleNft.useQuery({ id: Id });
   const updateNftData = api.nft.updateNft.useMutation();
   const updateBuyNft = api.nft.buyNft.useMutation();
-  // let newOwnerAddress1;
-  // setOwnerAddress(myNft?.ownerAddress);
 
   useEffect(() => {
     setData(myNft);
     console.log("data", data);
-    // newOwnerAddress1 = address;
     console.log("address", address);
   }, [myNft]);
 
@@ -66,8 +62,6 @@ const NftDetailPage = () => {
       name: data?.title,
       price: data?.price,
       quantity: 1,
-      // productId: data?.id,
-      // ownerAddress: data?.ownerAddress,
     },
   ];
 
@@ -136,18 +130,10 @@ const NftDetailPage = () => {
       if (listMyNft) {
         listMyNft();
         console.log("hash", listData?.hash);
-        // setTokenId(tokenIdData.toString());
-        // setListingModalOpen(false);
       }
       if (listWaitError) {
         alert(listWaitError);
       }
-      // console.log(tokenId);
-
-      // updateNftData.mutateAsync({
-      //   price: price,
-      //   active: true,
-      // });
     } catch (error) {
       alert(error);
     }
@@ -185,14 +171,13 @@ const NftDetailPage = () => {
         active: false,
       });
 
-      router.push("/");
+      router.push("/OwnerNfts/ownerAddress");
     },
   });
 
   const buyingSuccess = buyTxIsSuccess;
 
   async function buyingNft(e: any) {
-    // buyNft();
     e.preventDefault();
     console.log("helloo");
 
@@ -202,8 +187,6 @@ const NftDetailPage = () => {
       console.log("helloo 2");
 
       console.log("hash", buyData?.hash);
-      // setTokenId(tokenIdData.toString());
-      // setListingModalOpen(false);
     }
     if (true) {
       console.log("helloo 4");
@@ -213,11 +196,6 @@ const NftDetailPage = () => {
       alert(buyWaitError);
     }
     console.log("token id", data?.tokenId);
-
-    // updateBuyNft.mutateAsync({
-    //   id: data?.id,
-    //   active: false,
-    // });
   }
 
   return (
@@ -274,7 +252,6 @@ const NftDetailPage = () => {
               </div>
             </div>
           </div>
-          {/* {openLoader && <LoadingModal />} */}
         </div>
         {openInputModal && (
           <div className="fixed inset-0 z-50 flex items-center justify-center overflow-y-auto overflow-x-hidden outline-none focus:outline-none">

@@ -8,7 +8,7 @@ import { api } from "~/utils/api";
 const NftCardContainer = () => {
   const { isConnected } = useAccount();
 
-  const { data } = api.nft.all.useQuery();
+  const { data } = api.nft.getNftListed.useQuery({});
   console.log("data", data);
 
   return (

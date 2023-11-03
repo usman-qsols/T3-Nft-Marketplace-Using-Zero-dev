@@ -29,6 +29,7 @@ const CreateNftComp = () => {
   const [message, updateMessage] = useState("");
   const [listingModalOpen, setListingModalOpen] = useState(false);
   const [disableButton, setDisableButton] = useState(true);
+  const [listingLoader, setListingLoader] = useState(false);
 
   const { mutateAsync, error } = api.nft.createNft.useMutation();
   const router = useRouter();
@@ -132,10 +133,11 @@ const CreateNftComp = () => {
     data: listWaitData,
     isError: listWaitError,
     isSuccess: listTxIsSuccess,
+    isLoading: listTxIsLoading,
   } = useWaitForTransaction({
     hash: listData?.hash,
     onSuccess: () => {
-      router.push("/");
+      router.push("/OwnerNfts/ownerAddress");
     },
   });
 
@@ -165,9 +167,6 @@ const CreateNftComp = () => {
   } = useWaitForTransaction({
     hash: mintData?.hash,
     onSuccess: async () => {
-      // if (listMyNft) {
-      //   listMyNft();
-      // }
       setListingModalOpen(true);
     },
   });
@@ -178,13 +177,12 @@ const CreateNftComp = () => {
       if (listMyNft) {
         listMyNft();
         console.log("hash", listData?.hash);
-        // setTokenId(tokenIdData.toString());
         setListingModalOpen(false);
+        setListingLoader(true);
       }
       if (listWaitError) {
         alert(listWaitError);
       }
-      // console.log(tokenId);
 
       mutateAsync({
         title: title,
@@ -200,11 +198,6 @@ const CreateNftComp = () => {
     }
   }
 
-  // const isMintSuccess = txIsSuccess;
-  // if (isMintSuccess) {
-  //   router.push("/");
-  // }
-
   function mintNft(e: React.MouseEvent<HTMLElement>) {
     e.preventDefault();
     console.log("Ipfs url--> ", ipfsUrl);
@@ -213,22 +206,10 @@ const CreateNftComp = () => {
       if (safeMintNft) {
         safeMintNft();
         console.log("hash", mintData?.hash);
-        // setTokenId(tokenIdData.toString());
       }
       if (waitError) {
         alert(waitError);
       }
-      // console.log(tokenId);
-
-      // mutateAsync({
-      //   title: title,
-      //   price: price,
-      //   description: description,
-      //   ipfsHash: ipfsUrl,
-      //   ownerAddress: address.toString(),
-      //   tokenId: tokenIdData.toString(),
-      //   active: true,
-      // });
     } catch (error) {
       alert(error);
     }
@@ -241,14 +222,7 @@ const CreateNftComp = () => {
       <h2 className="h2 section-title">Create and sell your NFTs</h2>
 
       <div className="footer-list mb-20 mt-20 w-[100%] md:w-[50%]">
-        {/* <h3 className="text-[12px] md:text-[16px]">
-          Contract Address : {contractAddress}
-        </h3>
-        <h3 className="text-[12px] md:text-[16px]">
-          Marketplace Address : {sellerAddress}
-        </h3> */}
         <form action="" className="newsletter-form">
-          {/* <input type="email" name="email" placeholder="info@yourmail.com" required className="newsletter-input"> */}
           <input
             type="text"
             className="newsletter-input mt-5"
@@ -265,7 +239,6 @@ const CreateNftComp = () => {
             required
           />
           <input
-            // type="text"
             className="newsletter-input mt-5"
             placeholder="Price (in-USDC) > 0.000001"
             onChange={(e) => {
@@ -285,10 +258,10 @@ const CreateNftComp = () => {
           <button
             type="submit"
             className={` mt-5 flex h-20 w-[100%] justify-center text-[2rem] ${
-              disableButton ? "disableBtn" : "btn"
+              disableButton || !isConnected ? "disableBtn" : "btn"
             } `}
             aria-label="Submit"
-            disabled={disableButton ? true : false}
+            disabled={disableButton || !isConnected ? true : false}
             onClick={mintNft}
           >
             Submit
@@ -297,7 +270,11 @@ const CreateNftComp = () => {
       </div>
 
       {isMintLoading ? <LoadingModal h2="Minting, Please be patient" /> : ""}
-      {listIsLoading ? <LoadingModal h2="Listing, Please be patient" /> : ""}
+      {listIsLoading || listingLoader ? (
+        <LoadingModal h2="Listing, Please be patient" />
+      ) : (
+        ""
+      )}
       {listingModalOpen ? (
         <div className="fixed left-0 top-0 flex h-full w-full items-center justify-center bg-black bg-opacity-50 p-[10px] py-10">
           <div className="max-h-[300px] w-[300px] max-w-xl overflow-y-auto bg-white p-[10px] sm:rounded-2xl">
@@ -308,7 +285,7 @@ const CreateNftComp = () => {
                   our marketplace
                 </h1>
                 <button className="btn_list" onClick={listingNft}>
-                  {listIsLoading ? "Liting, please wait..." : "List Your Nft"}
+                  {listTxIsLoading ? "Liting, please wait..." : "List Your Nft"}
                 </button>
               </div>
             </div>
