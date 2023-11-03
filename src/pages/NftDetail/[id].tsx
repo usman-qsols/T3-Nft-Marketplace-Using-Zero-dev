@@ -120,6 +120,7 @@ const NftDetailPage = () => {
     hash: listData?.hash,
     onSuccess: () => {
       updateNftData.mutateAsync({
+        id: data?.id,
         price: price,
         active: true,
       });
@@ -173,6 +174,7 @@ const NftDetailPage = () => {
     data: buyWaitData,
     isError: buyWaitError,
     isSuccess: buyTxIsSuccess,
+    isLoading: buyWaitIsLoading,
   } = useWaitForTransaction({
     hash: buyData?.hash,
     onSuccess: () => {
@@ -255,7 +257,7 @@ const NftDetailPage = () => {
                         className="ml-auto flex rounded border-0 bg-sky-600 px-6 py-2 text-white hover:bg-sky-800 focus:outline-none"
                         onClick={(e: any) => buyingNft(e)}
                       >
-                        {buyIsLoading ? "Please Wait..." : "Buy Nft"}
+                        {buyWaitIsLoading ? "Please Wait..." : "Buy Nft"}
                       </button>
                     )}
 

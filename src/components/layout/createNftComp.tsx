@@ -308,7 +308,7 @@ const CreateNftComp = () => {
                   our marketplace
                 </h1>
                 <button className="btn_list" onClick={listingNft}>
-                  List Your Nft
+                  {listIsLoading ? "Liting, please wait..." : "List Your Nft"}
                 </button>
               </div>
             </div>
