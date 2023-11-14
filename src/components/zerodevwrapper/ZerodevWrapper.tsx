@@ -29,12 +29,12 @@ const connectors = connectorsForWallets([
     groupName: "Social",
     // eslint-disable-next-line
     wallets: [
-      googleWallet({ chains, options: { projectId } }),
-      facebookWallet({ chains, options: { projectId } }),
-      githubWallet({ chains, options: { projectId } }),
-      discordWallet({ chains, options: { projectId } }),
-      twitchWallet({ chains, options: { projectId } }),
-      twitterWallet({ chains, options: { projectId } }),
+      googleWallet({ chains, options: { projectId, shimDisconnect: true } }),
+      facebookWallet({ chains, options: { projectId, shimDisconnect: true } }),
+      githubWallet({ chains, options: { projectId }, shimDisconnect: true }),
+      discordWallet({ chains, options: { projectId }, shimDisconnect: true }),
+      twitchWallet({ chains, options: { projectId }, shimDisconnect: true }),
+      twitterWallet({ chains, options: { projectId }, shimDisconnect: true }),
     ],
   },
 ]);

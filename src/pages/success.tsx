@@ -87,7 +87,7 @@ const success = () => {
         <button
           className="btn mb-[10px] flex h-[50px] w-[200px] justify-center"
           onClick={approveNft}
-          disabled={approveTxIsSuccess ? true : false}
+          // disabled={approveTxIsSuccess ? true : false}
         >
           <span>
             {approveIsLoading

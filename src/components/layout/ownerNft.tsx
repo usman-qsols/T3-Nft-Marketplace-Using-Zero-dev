@@ -21,10 +21,10 @@ const NftCardContainer = () => {
     <section className="section explore" id="explore">
       {isConnected ? (
         <div className="container">
-          <p className="section-subtitle">Exclusive Assets</p>
+          <p className="section-subtitle">Exclusive Assets You Owned</p>
 
           <div className="title-wrapper">
-            <h2 className="h2 section-title">Explore</h2>
+            <h2 className="h2 section-title">Explore Your Own Nfts</h2>
           </div>
 
           <ul className="grid-list">

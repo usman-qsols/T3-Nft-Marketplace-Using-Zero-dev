@@ -8,6 +8,7 @@ import {
   useContractWrite,
   useWaitForTransaction,
   useAccount,
+  useFeeData,
 } from "wagmi";
 import { useSelector, useDispatch } from "react-redux";
 import { Stripe, loadStripe } from "@stripe/stripe-js";
@@ -64,6 +65,12 @@ const NftDetailPage = () => {
       quantity: 1,
     },
   ];
+
+  const alertFunc = () => {
+    alert(
+      "If didn't buy and approve tokens , you can click on the buy token button before buying nft.",
+    );
+  };
 
   const handleCheckout = async () => {
     const stripe = await stripePromise;
@@ -143,6 +150,19 @@ const NftDetailPage = () => {
   /////////////////// Buying Nft ///////////////////////////
   //////////////////////////////////////////////////////////
 
+  // const { config: buyConfig } = usePrepareContractWrite({
+  //   address: "0xB35610f89D0d8EC1aC3F2F3887475eB16A78BC35",
+  //   abi: T3MarketJson.abi,
+  //   functionName: "buy",
+  //   args: [data?.tokenId, data?.price],
+  // });
+  // const {
+  //   data: buyData,
+  //   isLoading: buyIsLoading,
+  //   isSuccess: buyIsSuccess,
+  //   write: buyNft,
+  // } = useContractWrite(buyConfig);
+
   const { config: buyConfig } = usePrepareContractWrite({
     address: "0xB35610f89D0d8EC1aC3F2F3887475eB16A78BC35",
     abi: T3MarketJson.abi,
@@ -155,6 +175,8 @@ const NftDetailPage = () => {
     isSuccess: buyIsSuccess,
     write: buyNft,
   } = useContractWrite(buyConfig);
+
+  const buyingSuccess = buyIsSuccess && !buyIsLoading;
 
   const {
     data: buyWaitData,
@@ -175,7 +197,7 @@ const NftDetailPage = () => {
     },
   });
 
-  const buyingSuccess = buyTxIsSuccess;
+  // const buyingSuccess = buyTxIsSuccess;
 
   async function buyingNft(e: any) {
     e.preventDefault();
@@ -231,12 +253,20 @@ const NftDetailPage = () => {
                 {address === data?.ownerAddress || !data?.active
                   ? ""
                   : isConnected && (
-                      <button
-                        className="ml-auto flex rounded border-0 bg-sky-600 px-6 py-2 text-white hover:bg-sky-800 focus:outline-none"
-                        onClick={(e: any) => buyingNft(e)}
-                      >
-                        {buyWaitIsLoading ? "Please Wait..." : "Buy Nft"}
-                      </button>
+                      <>
+                        <button
+                          className="ml-auto flex rounded border-0 bg-sky-600 px-6 py-2 text-white hover:bg-sky-800 focus:outline-none"
+                          onClick={(e: any) => buyingNft(e)}
+                        >
+                          {buyIsLoading ? "Please Wait..." : "Buy Nft"}
+                        </button>
+                        <button
+                          className="ml-auto flex rounded border-0 bg-sky-600 px-6 py-2 text-white hover:bg-sky-800 focus:outline-none"
+                          onClick={(e: any) => router.push("/BuyTokens")}
+                        >
+                          Buy {data?.price} Tokens for ${data?.price}
+                        </button>
+                      </>
                     )}
 
                 {!data?.active && address === data?.ownerAddress ? (

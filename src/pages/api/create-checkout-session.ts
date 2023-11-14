@@ -28,7 +28,8 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     payment_method_types: ["card"],
     line_items: transformedItems,
     mode: "payment",
-    success_url: `https://t3-nft-marketplace-using-zero-dev.vercel.app/success`,
+    // success_url: `https://t3-nft-marketplace-using-zero-dev.vercel.app/success`,
+    success_url: `http://localhost:3000/success`,
     // success_url: `http://192.168.10.134:3000/success`,
     cancel_url: `https://t3-nft-marketplace-using-zero-dev.vercel.app/checkout`,
     metadata: {
